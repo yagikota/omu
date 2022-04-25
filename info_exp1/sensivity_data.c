@@ -3,12 +3,13 @@
 #include <stdlib.h>
 
 #define MAX_CAL 100
-// #define N 6
-#define N 3
+#define N 6
+// #define N 3
 #define E 0.000001
 
 
 double max(double a, double b) { return a > b ? a : b; }
+
 
 double find_max_dist(double x_new[], double x_old[], int size) {
 	double max_dist;
@@ -26,6 +27,7 @@ void array_copy(double from[], double dist[], int size) {
 	}
 }
 
+// 内積を求める
 double get_inner_product(double x[], double y[], int size) {
 	double res;
 	int i;
@@ -39,31 +41,32 @@ double get_inner_product(double x[], double y[], int size) {
 int main(void) {
 	int i, j;
 	// N*N行列初期化
-	double a[N][N] = {
-		{2,1,0},
-		{1,2,1},
-		{1,5,3},
-	};
 	// double a[N][N] = {
-	// 	{1.0, 1.0, 5.0, 3.0, 9.9, 7.0},
-	// 	{1.0, 1.0, 1.0, 1.0 / 5.0, 1.0 / 3.0, 1.0 / 3.0},
-	// 	{1.0 / 5.0, 1.0, 1.0, 1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0},
-	// 	{1.0 / 3.0, 5.0, 3.0, 1.0, 1.0, 3.0},
-	// 	{1.0 / 9.0, 3.0, 3.0, 1.0, 1.0, 3.0},
-	// 	{1.0 / 7.0, 3.0, 3.0, 1.0 / 3.0, 1.0 / 3.0, 1.0},
+	// 	{2,1,0},
+	// 	{1,2,1},
+	// 	{1,5,3},
 	// };
+	double a[N][N] = {
+		{1.0, 1.0, 5.0, 3.0, 9.9, 7.0},
+		{1.0, 1.0, 1.0, 1.0 / 5.0, 1.0 / 3.0, 1.0 / 3.0},
+		{1.0 / 5.0, 1.0, 1.0, 1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0},
+		{1.0 / 3.0, 5.0, 3.0, 1.0, 1.0, 3.0},
+		{1.0 / 9.0, 3.0, 3.0, 1.0, 1.0, 3.0},
+		{1.0 / 7.0, 3.0, 3.0, 1.0 / 3.0, 1.0 / 3.0, 1.0},
+	};
 
 	// x_old初期化
-	// double x_old[N] = {1.0, 2.0, 3.0, 4.0, 5.0};
-	double x_old[N] = {1.0, 1.0, 1.0};
+	double x_old[N] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+	// test
+	// double x_old[N] = {1.0, 1.0, 1.0}; 
 	double x_new[N];
 	double u[N];
 	// lambdaとx「N]を求める
 	double lambda;
 	double x[N];
 	int cal = 0;
-	while (cal <= MAX_CAL)
-	{
+	// while loop start
+	while (cal <= MAX_CAL) {
 		printf("cal:%d\n", cal);
 		// normの初期化
 		double Norm = 0.0;
@@ -98,20 +101,24 @@ int main(void) {
 		double max_dist;
 		max_dist = find_max_dist(x_new, x_old, N);
 		printf("\nmax_dist=%.8f\n", max_dist);
-		if (max_dist < E)
-		{
-			cal = MAX_CAL + 100;
+		if (max_dist < E) {
+			// 収束条件満たす
 			// 固有値
 			lambda = get_inner_product(x_new, u, N);
 			// 固有ベクトル
 			array_copy(u, x, N);
-		}
-		else
-		{
+			break;
+		} else {
 			array_copy(x_new, x_old, N);
 			cal++;
 		}
+
+		if (cal >= MAX_CAL) { 
+			// x_oldをx_newで初期化
+			cal = 0;
+		}
 	}
+	// while loop end
 
 	printf("\n\n---固有値と固有ベクトルの表示--\n");
 	printf("固有値: %f\n", lambda);
