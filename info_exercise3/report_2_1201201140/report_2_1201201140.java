@@ -24,11 +24,10 @@ public class report_2_1201201140 {
 	// get_random_int returns a random integer between min(inclusive) and max(exclusive).
 	public static int get_random_int(int min, int max) {
 		Random rand = new Random();
-		return rand.nextInt(max - min + 1) + min; い
+		return rand.nextInt(max - min + 1) + min;
 	}
 
-	// TODO: ランダムな3整数にならない時がある
-	// get_distinct_rand_int returns a list of size n which contains distinct random integer.
+	// get_distinct_rand_int returns a list of size n which contains distinct random integers.
 	public static int[] get_distinct_rand_int(int min, int max, int n) {
 		int[] res = new int[n];
 		int i = 0;
@@ -204,14 +203,5 @@ public class report_2_1201201140 {
 		// データ X に対し，クラスター数 C=3 として k-means法を実行．
 		int C = 3;
 		kmeans(X, C);
-
-	// 	System.out.println("---b---");
-	// 	double[][] b = b_init(X, C);
-	// 	show(b);
-	// 	System.out.println("---u---");
-	// 	double[][] u = (u_nearest(b, X));
-	// 	show(u);
-	// 	System.out.println("---b_new---");
-	// 	show(b_new(u, X));  
 	}
 }

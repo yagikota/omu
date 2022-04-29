@@ -1,0 +1,23 @@
+1201201140
+八木洸太
+
+(1) まず，上記の100個の乱数を1行に1つずつ保存した
+テキストファイルを生成するコマンドを実行する．
+1. report-2-2-1201201140.cで自分の学籍番号の下4桁を乱数のシードとする。
+2. report-2-2-1201201140.cをコンパイルし、a.outファイルを作成する。
+3. ./a.out > report-3-1201201140-log.txtを実行し100個の乱数を保存する。
+
+(2) 次に，カテゴリごとに，テキストファイルをもとに
+度数を表示するコマンドを実行する．
+1. grep '^[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^1[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^2[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^3[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^4[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^5[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^6[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^7[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^8[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^9[1-9]$' report-3-1201201140-log.txt | wc -l
+   grep '^100$' report-3-1201201140-log.txt | wc -l
+を実行する。
