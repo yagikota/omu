@@ -30,6 +30,7 @@ public class report_3_1201201140 {
 	}
 
 	// Comparableインターフェースを実装
+	// https://web.plus-idea.net/2016/02/java-object-sort/
 	public static class Sort implements Comparable<Sort> {
 		// ユークリッド距離
 		double first;
@@ -40,7 +41,7 @@ public class report_3_1201201140 {
 			this.first = first;
 			this.second = second;
 		}
-		// 昇順にソート
+		// 昇順にソート, 値が同じ場合、インデックスで昇順にソート
 		public int compareTo(Sort num) {
 			if (this.first <= num.first) {
 				return -1;
