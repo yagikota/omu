@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.Math;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Arrays;
 
 
@@ -31,26 +29,28 @@ public class report_3_1201201140 {
 		System.out.println();
 	}
 
-	// Comparableインターフェースを実装する
+	// Comparableインターフェースを実装
 	public static class Sort implements Comparable<Sort> {
+		// ユークリッド距離
 		double first;
+		// ラベルのインデックス
 		int second;
 
 		public Sort(double first, int second) {
 			this.first = first;
 			this.second = second;
 		}
+		// 昇順にソート
 		public int compareTo(Sort num) {
-			//第一要素の値が同じ場合に、第二要素で昇順にソートする処理
-			if (this.first == num.first) {
-				return 1;
+			if (this.first <= num.first) {
+				return -1;
 			} else {
-				return (int)(this.first - num.first);
+				return 1;
 			}
 		}
 	}
 
-	// xとyの距離を算出
+	// xとyのユークリッド距離を算出
 	public static double getDist(double[] x, double[] y) {
 		double pow_dist = 0.0;
 		for (int i = 0; i < x.length; i++) {
@@ -60,17 +60,18 @@ public class report_3_1201201140 {
 	}
 
 	public static String[] getKthNearestIris(double[][] X, String[] y, int k, double[] x) {
-		// Sort[] sort = new Sort[X.length];
+		Sort[] sort = new Sort[X.length];
 		for (int i = 0; i < X.length; i++) {
 			double dist = getDist(X[i], x);
 			sort[i] = new Sort(dist, i);
 		}
 		Arrays.sort(sort);
 
-		// ソートしたマップからk個だけ抽出
+		// ソートしたものから先頭k個のラベルを抽出
 		String[] irisList = new String[k];
-		for(int i = 0; i < k; i++) {
-			irisList[i] = y[sort[i].second];
+		for (int i = 0; i < k; i++) {
+			int idx = sort[i].second;
+			irisList[i] = y[idx];
 		}
 		return irisList;
 	}
@@ -84,7 +85,7 @@ public class report_3_1201201140 {
 		int curr_count = 1;
 
 		for (int i = 1; i < arr.length; i++) {
-			if (arr[i] == arr[i - 1])
+			if (arr[i].equals(arr[i - 1]))
 				curr_count++;
 			else
 				curr_count = 1;
@@ -94,6 +95,8 @@ public class report_3_1201201140 {
 				res = arr[i - 1];
 			}
 		}
+		// 予測結果と近傍内クラスラベルを表示
+		System.out.println(res + ":" + Arrays.toString(arr));
 		return res;
 	}
 
@@ -142,32 +145,37 @@ public class report_3_1201201140 {
 		}
 
 		// データ行列 X と正解ラベル y の表示
+		System.out.println("\nデータX");
 		show(X);
+		System.out.println("\n教師ラベル");
 		show(y);
-
+		
 		// パラメータ k を定める．
 		int k = 5;
 
 		// 以下でleave-one-out交差検証法でk近傍法の性能を確認する．(ここを適切に完成させる)
+		System.out.println("\n予測結果と近傍内クラスラベル");
 		int correctCounter = 0;
 		for (int i = 0; i < n; i++) {
 			double[] x = X[i];
 
 			// Xとyを再定義
-			double[][] newX = new double[n-1][m-1];
-			double[] newy = new double[n-1]
-			for (int j = 0; j < n-1; j++) {
+			double[][] newX = new double[n - 1][m - 1];
+			String[] newY = new String[n - 1];
+			for (int j = 0; j < n - 1; j++) {
 				if (j == i) {
 					continue;
 				}
 				newX[j] = X[j];
-				newy[j] = y[j];
+				newY[j] = y[j];
 			}
-			String iris = knn(newX, newy, k, x);
-			if (iris == y[i]) {
+			String iris = knn(newX, newY, k, x);
+			// ラベルを判定
+			if (iris.equals(y[i])) {
 				correctCounter++;
 			}
 		}
+		// 予測精度
 		double prediction = (double)correctCounter / (double)n;
 		System.out.println("Prediction Accuracy = " + prediction);
 	}
