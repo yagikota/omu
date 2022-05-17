@@ -15,9 +15,8 @@ DEALER  // 1
 
 using namespace std;
 
-
+// プレイヤーとディーラーのクラス
 class Card_holder {
-
 	private:
 	int holder;
 	// 引いた全カード（カード履歴）
@@ -25,14 +24,18 @@ class Card_holder {
 	// 引いた全カードの合計値
 	int total_point;
 	bool bust;
+	char int_to_suit[4];
 
 	public:
 	Card_holder(int holder) {
 		holder = holder;
 		total_point = 0;
 		bust = false;
+		int_to_suit[0] = 'S';
+		int_to_suit[1] = 'H';
+		int_to_suit[2] = 'D';
+		int_to_suit[3] = 'C';
 	}
-
 
 	int get_total_point() {
 		return total_point;
@@ -42,21 +45,20 @@ class Card_holder {
 		return bust;
 	};
 
-
 	int point_of(int card) {
-	int rank = card % 13 + 1;
-	// 数字が10，11(J)，12(Q)，13(K) のカード： 10とする
-		if(rank >= 11) {
-	rank = 10;
-	}
-	// 数字が1(A) のカード
-	if (rank == 1) {
-	// プレイヤー
-	if (holder == PLAYER && total_point < 10) {
-		rank = 11;
-	}
-	// ディーラーは常に１とする
-	}
+		int rank = card % 13 + 1;
+		// 数字が10，11(J)，12(Q)，13(K) のカード： 10とする
+			if(rank >= 11) {
+		rank = 10;
+		}
+		// 数字が1(A) のカード
+		if (rank == 1) {
+		// プレイヤー
+		if (holder == PLAYER && total_point < 10) {
+			rank = 11;
+		}
+		// ディーラーは常に１とする
+		}
 
 	// この時のランクがポイントになる
 		return rank;
@@ -64,7 +66,6 @@ class Card_holder {
 
 	// これまで引いた全カード表示
 	void print_all_cards() {
-		char int_to_suit[4] = {'S', 'H', 'D', 'C'};
 		int curr_card, rank;
 		char suit;
 		for (int i = 0; i < all_cards.size(); i++) {
@@ -75,23 +76,24 @@ class Card_holder {
 		} 
 	}
 
-// 新しいカードを1枚引く
 	void hit(vector<int>& deck) {
 		int new_card;
+		// 新しいカードを1枚引き，デッキから削除
 		new_card = deck.back();
 		deck.pop_back();
 
-	// 引いたカードをカード履歴に追加
-	all_cards.push_back(new_card);
-	
+		// 引いたカードをカード履歴に追加
+		all_cards.push_back(new_card);
+		// ポイント加算
 		total_point += point_of(new_card);
-	// ゲーム終了
+		// ゲーム終了
 		if(total_point > 21) {
-	bust = true;
-	}
+			bust = true;
+		}
 	}
 };
 
+// トランプのクラス
 class Trump {
 	private:
 	vector<int> cardlist;
@@ -101,19 +103,17 @@ class Trump {
 		for(int i = 0; i < NUM_CARDS; i++) {
 			cardlist.push_back(-1);
 		}
-		//乱数生成
+
 		std::random_device rnd;
-		//配列にカードを順番に格納(iのカードをどこに挿入するかを決める)
 		for(int i = 0; i < NUM_CARDS; i++) {
-			//iのカードが挿入されるまでループ
 			while(1) {
-				//乱数によって挿入位置を選定
-				int place = rnd()%(NUM_CARDS); //挿入位置
-				//乱数で決めた挿入位置が空であるか確認
+				// 乱数によって挿入位置を決定
+				int place = rnd()%(NUM_CARDS);
+				// 空いていれば挿入
 				if(cardlist[place] == -1) {
-				//カードの格納
-				cardlist[place] = i;
-				break; //ループを抜ける
+					// iがトランプのrankとsuitの情報を持っている
+					cardlist[place] = i;
+					break;
 				}
 			}
 		}
@@ -126,36 +126,16 @@ class Trump {
 
 
 int main() {
-// 	// 1-13のカード4種類をランダムにシャッフル
-// // TODO: クラスにする？
-// 	vector<int> cardlist(NUM_CARDS);
-// 	for(int i = 0; i < NUM_CARDS; i++) {
-// 		//-1の代入
-// 		cardlist[i] = -1;
-// 	}
-
-// 	// シャッフルされたカードを生成
-// 	std::random_device rnd;
-// 	for(int i = 0; i < NUM_CARDS; i++) {
-// 		while(1) {
-// 		int place = rnd() % (NUM_CARDS);
-// 		if(cardlist[place] == -1) {
-// 			cardlist[place] = i;
-// 			break;
-// 		}
-// 		}
-// 	}
-
+	// シャッフルされたトランプの生成
 	Trump trump;
 	vector<int> cardlist = trump.get_card_list();
-
+	// プレイヤーとディーラーの生成
 	Card_holder player(PLAYER);
 	Card_holder dealer(DEALER);
 
 
+	// ディーラーがカードを2枚引き，1枚公開
 	cout << "---Dealer Turn---" << endl;
-	// ディーラーのカードを2枚引き，1枚公開
-	// （ここでは１枚だけ引き，２枚引いたように見せている）
 	cout << "Dealer:" << endl;
 	dealer.hit(cardlist);
 	dealer.print_all_cards();
@@ -163,37 +143,38 @@ int main() {
 	cout << "***" << endl;
 	cout << endl;
 
-	cout << "---Player Turn---" << endl;
+
 	// プレイヤーはカードを2枚引き，２枚公開
+	cout << "---Player Turn---" << endl;
 	cout << "Player:" << endl;
 	player.hit(cardlist);
 	player.hit(cardlist);
 	player.print_all_cards();
 	cout << endl;
 
+
+	// プレイヤーのターン
 	char choice = 'h';
 	while(!player.is_bust()) {
 		cout << "Hit (h) or Stand (s)?:" << endl;
 		cin >> choice;
-		if(choice == 's') {
-		break;
-	}
-	cout << "Player:" << endl;
+		if(choice == 's') break;
+		cout << "Player:" << endl;
 		player.hit(cardlist);
 		player.print_all_cards();
 	};
 
 	if(choice != 's') {
-		player.print_all_cards();
 		cout << "player bust" << endl;
 		cout << "---Game Finished!---" << endl;
 		goto PLAYER_LOSE_WITH_BUST;
 	}
 
 
-	// バーストしてなければディーラーのターン
+	// ディーラーのターン
 	cout << "---Dealer Turn---" << endl;
-
+	cout << "Dealer:" << endl;  
+	dealer.print_all_cards();  
 
 	while(dealer.get_total_point() < 17) {
 		dealer.hit(cardlist);
@@ -202,14 +183,17 @@ int main() {
 	};
 
 	if(dealer.is_bust()) {
+		// cout << "Dealer:" << endl;  
 		// dealer.print_all_cards();
 		cout << "dealer bust" << endl;
 		cout << "---Game Finished!---" << endl;
 		goto PLAYER_WIN_WITH_DEALER_BUST;
 	}
 
+
+	// ゲーム終了の処理
 	cout << "---Game Finished!---" << endl;
-	if(player.get_total_point() > dealer.get_total_point()) goto PLAYER_WIN ;
+	if(player.get_total_point() > dealer.get_total_point()) goto PLAYER_WIN;
 	if(player.get_total_point() == dealer.get_total_point()) goto NO_GAME;
 	if(player.get_total_point() < dealer.get_total_point()) goto PLAYER_LOSE;
 
