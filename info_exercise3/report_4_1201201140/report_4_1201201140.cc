@@ -99,7 +99,7 @@ class Trump {
 	public:
 	Trump() {
 		for(int i = 0; i < NUM_CARDS; i++) {
-		cardlist[i] = -1;
+			cardlist.push_back(-1);
 		}
 		//乱数生成
 		std::random_device rnd;
