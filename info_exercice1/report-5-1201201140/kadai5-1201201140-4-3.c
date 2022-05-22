@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h> 
 #include <stdbool.h>
+#include <ctype.h>
 
 //push 関数．
 // s[]: スタックを表現する配列
@@ -23,46 +24,45 @@ int pop( int s[], int l[2] );
 //   l: スタックの長さ
 void print_stack( int s[], int l );
 
-bool is_digit(char c) {
-	return (strcmp(&c, "1") || strcmp(&c, "2") || strcmp(&c, "3") || strcmp(&c, "4") || strcmp(&c, "5") || strcmp(&c, "6") || strcmp(&c, "7") || strcmp(&c, "8") || strcmp(&c, "9"));
-}
-
 int main( void ){
 
 	int stack[ MAX_STACK ];//スタックを表現する配列
 	int len = 0;//スタックの長さ．最初はスタックに何も積まれていないので0
 	char eq[] = "7 8 + 4 9 - *";//逆ポーランド式記法の数式
-	printf( "%s\n", eq);
 
 	// eq を前から読んでいって，整数の場合はpush, 演算子の場合は2回pop して計算結果をpush//
-	for (int i = 0; i < sizeof(eq) / sizeof(eq[0]); i++) {
-		char c = eq[i];
-		if (strcmp(c," ")) {
-			continue;
-		} else if (strcmp(&c,"+")) {
-			int val = 0;
-			val = pop(stack, &len);
-			val += pop(stack, &len);
-			len = push(stack, len, val);
-		} else if (strcmp(&c,"-")) {
-			int val = 0;
-			val = pop(stack, &len);
-			val -= pop(stack, &len);
-			len = push(stack, len, val);
-		} else if (strcmp(&c,"*")) {
-			int val = 0;
-			val = pop(stack, &len);
-			val *= pop(stack, &len);
-			len = push(stack, len, val);
-		} else if (strcmp(&c,"/")) {
-			int val = 0;
-			val = pop(stack, &len);
-			val /= pop(stack, &len);
-			len = push(stack, len, val);
-		} else if (is_digit(c)) {
-			len = push(stack, len, (int)c);
+
+for ( int i = 0; eq[i] != '\0'; i++) {
+		if ( '9' >= eq[i] && eq[i] >= '1' ) {
+			// push(stack,&sp,eq[i]);
+			len = push(stack, len, atoi(&eq[i]));
+		} else {
+			if (eq[i] == '+') {
+				int val = 0;
+				val = pop(stack, &len);
+				val += pop(stack, &len);
+				len = push(stack, len, val);
+			} else if  (eq[i] == '-') {
+				int first = pop(stack, &len);
+				int second = pop(stack, &len);
+				len = push(stack, len, second - first);
+			} else if  (eq[i] == '*') {
+				int val = 0;
+				val = pop(stack, &len);
+				val *= pop(stack, &len);
+				len = push(stack, len, val);
+			} else  if  (eq[i] == '/'){
+				// 	second = pop(stack, &sp);
+				// first = pop(stack, &sp);
+				// push(stack, &sp, i2c(c2i(first) / c2i(second)));
+				int val = 0;
+				val = pop(stack, &len);
+				val /= pop(stack, &len);
+				len = push(stack, len, val);
+			}
 		}
 	}
+
 
 		/////////////////////////////////ここまで//////////////////////////////////////
 
