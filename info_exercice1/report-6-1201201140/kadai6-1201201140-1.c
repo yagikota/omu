@@ -1,3 +1,6 @@
+// 1201201140
+// 八木洸太
+
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <time.h>
