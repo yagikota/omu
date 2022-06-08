@@ -9,6 +9,7 @@
 # define sq2(a) (a)*(a)
 
 int main(void) {
+	// 計算結果が違う例
 	int result1 = sq1(1+1);
 	int result2 = sq2(1+1);
 	// 期待値は4
