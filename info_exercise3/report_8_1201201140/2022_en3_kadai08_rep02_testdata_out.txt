@@ -1,0 +1,138 @@
+＜課題の平均点，最高点，最低点＞
+課題1
+平均点:46.45点
+最高点: WWWWW 98点
+最低点: ZZZZZ 1点
+
+課題2
+平均点:58.3点
+最高点: BBBBB 88点
+最低点: JJJJJ 11点
+
+課題3
+平均点:58.8点
+最高点: MMMMM 97点
+最低点: ZZZZZ 9点
+
+課題4
+平均点:49.4点
+最高点: CCCCC 97点
+最低点: MMMMM 3点
+
+課題5
+平均点:49.85点
+最高点: OOOOO 97点
+最低点: QQQQQ 1点
+
+＜各課題合否＞
+＜課題1＞
+1: CCCCC 81点 合格
+1: PPPPP 10点 不合格
+1: GGGGG 66点 合格
+1: ZZZZZ 1点 不合格
+1: RRRRR 6点 不合格
+1: MMMMM 93点 合格
+1: KKKKK 60点 不合格
+1: BBBBB 34点 不合格
+1: CCCCC 21点 不合格
+1: FFFFF 35点 不合格
+1: OOOOO 44点 不合格
+1: CCCCC 45点 不合格
+1: QQQQQ 59点 不合格
+1: GGGGG 48点 不合格
+1: JJJJJ 55点 不合格
+1: WWWWW 98点 合格
+1: PPPPP 32点 不合格
+1: FFFFF 67点 合格
+1: MMMMM 68点 合格
+1: QQQQQ 6点 不合格
+
+＜課題2＞
+2: CCCCC 48点 不合格
+2: PPPPP 86点 合格
+2: GGGGG 78点 合格
+2: ZZZZZ 45点 不合格
+2: RRRRR 16点 不合格
+2: MMMMM 84点 合格
+2: KKKKK 87点 合格
+2: BBBBB 88点 合格
+2: CCCCC 14点 不合格
+2: FFFFF 84点 合格
+2: OOOOO 65点 合格
+2: CCCCC 36点 不合格
+2: QQQQQ 87点 合格
+2: GGGGG 64点 合格
+2: JJJJJ 11点 不合格
+2: WWWWW 19点 不合格
+2: PPPPP 37点 不合格
+2: FFFFF 74点 合格
+2: MMMMM 83点 合格
+2: QQQQQ 60点 不合格
+
+＜課題3＞
+3: CCCCC 26点 不合格
+3: PPPPP 41点 不合格
+3: GGGGG 47点 不合格
+3: ZZZZZ 9点 不合格
+3: RRRRR 70点 合格
+3: MMMMM 97点 合格
+3: KKKKK 70点 合格
+3: BBBBB 24点 不合格
+3: CCCCC 28点 不合格
+3: FFFFF 54点 不合格
+3: OOOOO 50点 不合格
+3: CCCCC 94点 合格
+3: QQQQQ 76点 合格
+3: GGGGG 38点 不合格
+3: JJJJJ 90点 合格
+3: WWWWW 90点 合格
+3: PPPPP 93点 合格
+3: FFFFF 45点 不合格
+3: MMMMM 48点 不合格
+3: QQQQQ 86点 合格
+
+＜課題4＞
+4: CCCCC 10点 不合格
+4: PPPPP 12点 不合格
+4: GGGGG 60点 不合格
+4: ZZZZZ 82点 合格
+4: RRRRR 70点 合格
+4: MMMMM 3点 不合格
+4: KKKKK 16点 不合格
+4: BBBBB 84点 合格
+4: CCCCC 50点 不合格
+4: FFFFF 46点 不合格
+4: OOOOO 29点 不合格
+4: CCCCC 97点 合格
+4: QQQQQ 47点 不合格
+4: GGGGG 9点 不合格
+4: JJJJJ 46点 不合格
+4: WWWWW 17点 不合格
+4: PPPPP 46点 不合格
+4: FFFFF 95点 合格
+4: MMMMM 72点 合格
+4: QQQQQ 97点 合格
+
+＜課題5＞
+5: CCCCC 7点 不合格
+5: PPPPP 61点 合格
+5: GGGGG 34点 不合格
+5: ZZZZZ 95点 合格
+5: RRRRR 91点 合格
+5: MMMMM 32点 不合格
+5: KKKKK 74点 合格
+5: BBBBB 45点 不合格
+5: CCCCC 5点 不合格
+5: FFFFF 36点 不合格
+5: OOOOO 97点 合格
+5: CCCCC 71点 合格
+5: QQQQQ 1点 不合格
+5: GGGGG 38点 不合格
+5: JJJJJ 81点 合格
+5: WWWWW 61点 合格
+5: PPPPP 71点 合格
+5: FFFFF 27点 不合格
+5: MMMMM 34点 不合格
+5: QQQQQ 36点 不合格
+
+
