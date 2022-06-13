@@ -9,13 +9,13 @@ double plus(double x, double y) {
 }
 
 double minus(double x, double y) {
-	return x + y;
+	return x - y;
 }
 
 double multiply(double x, double y) {
-	return x + y;
+	return x * y;
 }
 
 double divide(double x, double y) {
-	return x + y;
+	return x / y;
 }
