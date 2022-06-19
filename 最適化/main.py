@@ -1,13 +1,30 @@
 # NN個の荷物があり、荷物iiは重さw[i]、利益v[i]とする。
 # 許容重量がWWで、許容重量を超えず、かつ利益が最大になるような荷物の選択をする。
+# https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E6%AC%A1%E5%9B%9E%E4%BB%A5%E9%99%8D%E3%81%AE%E4%BA%88%E5%AE%9A/
+# https://zeronosu77108.hatenablog.com/entry/2017/12/25/131726
+# python3 main.pyを実行
+
+
+from csv import reader
+import time
+
+def csv_to_list(filename):
+    with open(filename, 'r') as read_obj:
+        csv_reader = reader(read_obj)
+        return list(csv_reader)
 
 if __name__ == "__main__":
-    # 各製品の容量と利益
-    size = [3, 5, 4, 2, 10, 7, 1, 5]
-    price = [3, 7, 6, 3, 13, 9, 2, 6]
+    start = time.time()
+    # 適宜ファイル名を変更
+    input_filename = "input1.csv"
+    df = csv_to_list(input_filename)
+
+    # 各製品の容量と利益をcsvから抽出
+    size = [int(c) for c in df[0]]
+    price = [int(c) for c in df[1]]
 
     # 容量
-    capacity = 25
+    capacity = int(df[2][0])
     # 製品の個数
     n = len(size)
 
@@ -29,7 +46,6 @@ if __name__ == "__main__":
             curr_size += is_put * size[j]
             curr_price += is_put * price[j]
 
-            # capa を越えたらフラグを立てて break
             if curr_size > capacity :
                 over_maz_size = True
                 break
@@ -43,4 +59,4 @@ if __name__ == "__main__":
     print(combination)
     print("合計価格: ", max_price)
     print("合計サイズ: ", max_size)
-
+    print("実行時間:{0}(s)".format(time.time() - start))
