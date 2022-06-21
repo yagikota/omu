@@ -13,6 +13,22 @@ def csv_to_list(filename):
         csv_reader = reader(read_obj)
         return list(csv_reader)
 
+# 利得が最大となるような組み合わせと合計サイズを全て表示
+def print_combs_info(comb, price, size):
+    total_price = 0
+    for i in range(len(comb)):
+        total_price += comb[i] * price[i]
+    if total_price == max_price:
+        print(comb)
+        print_sizes(comb, size, total_price)
+
+def print_sizes(comb, size, total_price):
+    total_size = 0
+    for i in range(len(comb)):
+        total_size += comb[i] * size[i]
+    if total_price == max_price:
+        print(total_size)
+
 if __name__ == "__main__":
     start = time.time()
     # 適宜ファイル名を変更
@@ -50,13 +66,22 @@ if __name__ == "__main__":
                 over_maz_size = True
                 break
 
-        if (not over_maz_size) and curr_price > max_price :
+        if (not over_maz_size) and curr_price >= max_price :
             max_price = curr_price
             max_size = curr_size
-            combination = tmp_comb
+            # combination = tmp_comb
+            combination.append(tmp_comb)
 
-    print("合計が最大になる組み合わせ")
-    print(combination)
+
+
+
+    print("合計が最大になる組み合わせ（全て）")
+    for comb in combination:
+        print_combs_info(comb, price, size)
+
+
+    # print(combination)
+
     print("合計価格: ", max_price)
     print("合計サイズ: ", max_size)
     print("実行時間:{0}(s)".format(time.time() - start))
