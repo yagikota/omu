@@ -12,8 +12,9 @@
 
 # 課題2
 CC=gcc
-OBJS =  kadai9-1201201140-2-main.o kadai9-1201201140-2.o
+OBJS = kadai9-1201201140-2-main.o kadai9-1201201140-2.o
+LOADLIBES = -lm
 main: $(OBJS)
-	$(CC) $(OBJS) -o main
+	$(CC) $(OBJS)  $(LOADLIBES) -o main
 kadai9-1201201140-1-main.o:  kadai9-1201201140-2-main.c
 kadai9-1201201140-1.c:  kadai9-1201201140-2.c
