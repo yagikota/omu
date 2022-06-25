@@ -1,49 +1,9 @@
 # 1201201140
 # 八木洸太
 
-from audioop import avg, maxpp
 from csv import reader
-from mimetypes import init
-from pickle import NONE
 from math import sqrt
-PASSING_SCORE = 60
 TEST_NUM = 5
-
-
-def csv_to_list(filename):
-    with open(filename, 'r') as read_obj:
-        csv_reader = reader(read_obj)
-        return list(csv_reader)
-
-def write_score_details(students, avg_score_list, max_scores_list, min_scores_list, std_deviations_list, f):
-    f.write("＜課題の平均点, 最高点, 最低点, 偏差値の情報＞\n")
-    f.write("課題数 5\n")
-    f.write("学生人数 20\n")
-    for i in range(TEST_NUM):
-        f.write("<課題{0}>\n".format(i+1))
-        f.write("平均点:{0}点\n".format(avg_score_list[i]))
-
-        max_score = max_scores_list[i]
-        f.write("最高点: {0}点\n".format(max_score))
-        s_list = get_max_score_students_list(students, max_score, i)
-        f.write("最高点取得学生: {0}名\n".format(len(s_list)))
-        for idx, student in enumerate(s_list):
-            f.write("{0}: {1}\n".format(idx+1, student.id))
-
-        min_score = min_scores_list[i]
-        f.write("最低点: {0}点\n".format(min_score))
-        s_list = get_min_score_students_list(students, min_score, i)
-        f.write("最低点取得学生: {0}名\n".format(len(s_list)))
-        for idx, student in enumerate(s_list):
-            f.write("{0}: {1}\n".format(idx+1, student.id))
-
-        f.write("偏差値\n")
-        for j in range(6):
-            min_dev_val = 20 + j * 10
-            max_dev_val = min_dev_val + 10
-            counter = count_students_with_deviation_value(students, min_dev_val, max_dev_val, i)
-            f.write("{0}~{1}: {2}名\n".format(min_dev_val, max_dev_val, counter))
-        f.write("\n")
 
 class Student:
     def __init__(self, s_id, name, scores):
@@ -73,9 +33,6 @@ class Student:
         self.deviation_value4 = 50 + 10 * (self.score4 - avg_scores_list[3]) / std_deviations_list[3]
         self.deviation_value5 = 50 + 10 * (self.score5 - avg_scores_list[4]) / std_deviations_list[4]
 
-    def print_info(self):
-        print(self.id, self.name, self.score1, self.score2, self.score3, self.score4, self.score5,
-            self.deviation_value1, self.deviation_value2, self.deviation_value3, self.deviation_value4, self.deviation_value5)
 
 def init_students(df):
     students = [None] * len(df)
@@ -86,10 +43,6 @@ def init_students(df):
         student = Student(s_id, name, scores)
         students[i] = student
     return students
-
-def print_students_info(students):
-    for s in students:
-        s.print_info()
 
 def get_avg_scores_list(students):
     scores_sum = students[0].get_scores()
@@ -139,6 +92,7 @@ def get_min_score_students_list(students, min_score, i):
             students_list.append(s)
     return students_list
 
+# 課題iの偏差値min_dev_val~max_dev_valの人数
 def count_students_with_deviation_value(students, min_dev_val, max_dev_val, i):
     counter = 0
     for s in students:
@@ -147,25 +101,55 @@ def count_students_with_deviation_value(students, min_dev_val, max_dev_val, i):
             counter += 1
     return counter
 
+
+def csv_to_list(filename):
+    with open(filename, 'r') as read_obj:
+        csv_reader = reader(read_obj)
+        return list(csv_reader)
+
+def write_score_details(students, avg_score_list, max_scores_list, min_scores_list, f):
+    f.write("＜課題の平均点, 最高点, 最低点, 偏差値の情報＞\n")
+    f.write("課題数 5\n")
+    f.write("学生人数 20\n")
+    for i in range(TEST_NUM):
+        f.write("<課題{0}>\n".format(i+1))
+        f.write("平均点:{0}点\n".format(avg_score_list[i]))
+
+        max_score = max_scores_list[i]
+        f.write("最高点: {0}点\n".format(max_score))
+        s_list = get_max_score_students_list(students, max_score, i)
+        f.write("最高点取得学生: {0}名\n".format(len(s_list)))
+        for idx, student in enumerate(s_list):
+            f.write("{0}: {1}\n".format(idx+1, student.id))
+
+        min_score = min_scores_list[i]
+        f.write("最低点: {0}点\n".format(min_score))
+        s_list = get_min_score_students_list(students, min_score, i)
+        f.write("最低点取得学生: {0}名\n".format(len(s_list)))
+        for idx, student in enumerate(s_list):
+            f.write("{0}: {1}\n".format(idx+1, student.id))
+
+        f.write("偏差値\n")
+        for j in range(6):
+            min_dev_val = 20 + j * 10
+            max_dev_val = min_dev_val + 10
+            counter = count_students_with_deviation_value(students, min_dev_val, max_dev_val, i)
+            f.write("{0}~{1}: {2}名\n".format(min_dev_val, max_dev_val, counter))
+        f.write("\n")
+
 if __name__ == "__main__":
     input_filename = "2022_en3_kadai08_rep02_testdata.csv"
     output_filename = "report-10-01-1201201140-out.txt"
 
     df = csv_to_list(input_filename)
-
     students = init_students(df)
 
     avg_scores_list = get_avg_scores_list(students)
-    print(avg_scores_list)
     max_scores_list = get_max_scores_list(students)
-    print(max_scores_list)
     min_scores_list = get_min_scores_list(students)
-    print(min_scores_list)
-    std_deviations_list = get_std_deviations_list(students, avg_scores_list)
-    print(std_deviations_list)
 
+    std_deviations_list = get_std_deviations_list(students, avg_scores_list)
     set_deviation_values_to_students(students, std_deviations_list, avg_scores_list)
-    print_students_info(students)
 
     with open(output_filename, "w") as f:
-        write_score_details(students, avg_scores_list, max_scores_list, min_scores_list, std_deviations_list, f)
+        write_score_details(students, avg_scores_list, max_scores_list, min_scores_list, f)
