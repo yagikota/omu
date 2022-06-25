@@ -12,11 +12,11 @@ int generate_rand_int(int min, int max) {
 	return min + rand() % (max - min + 1);
 }
 
-void print_nums(int *nums) {
-	for (int i = 0; i < NUMS; i++) {
-		printf("%d\n", *(nums + i));
-	}
-}
+// void print_nums(int *nums) {
+// 	for (int i = 0; i < NUMS; i++) {
+// 		printf("%d\n", *(nums + i));
+// 	}
+// }
 
 void print_counter(int *counter) {
 	puts("出現頻度");
@@ -27,14 +27,16 @@ void print_counter(int *counter) {
 }
 
 int main(void) {
-	srand((unsigned int)time(NULL));
+	// srand((unsigned int)time(NULL));
+	srand(100);
 
 	int *nums;
 	nums = (int*)malloc(sizeof(int) * NUMS);
 	for (int i = 0; i < NUMS; i++) {
 		*(nums + i) = generate_rand_int(0, 99);
 	}
-		print_nums(nums);
+
+	// print_nums(nums);
 
 	int *counter;
 	counter = (int *)malloc(sizeof(int) * NUMS);
@@ -49,7 +51,7 @@ int main(void) {
 
 	print_counter(counter);
 
-	// free(*nums);
-	// free(*counter);
+	free(nums);
+	free(counter);
 	return 0;
 }
