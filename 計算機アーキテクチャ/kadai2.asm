@@ -22,7 +22,6 @@ main:
 	mult	$t0, $t1
 	
 	# devide n(n+1) by 2 and store the result on s
-	mfhi	$t2
 	mflo	$t1
 	lw	$t3	s
 	div	$t3, $t1, 2
