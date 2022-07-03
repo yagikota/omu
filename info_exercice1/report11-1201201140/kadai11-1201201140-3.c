@@ -2,8 +2,6 @@
 // 八木洸太
 
 #include<stdio.h>
-#include <stdlib.h> 
-#include<math.h>
 
 #define PAYMENT 1000
 
@@ -41,7 +39,7 @@ int main(void) {
 	Change change = {0, 0, 0, 0};
 	count_change(&change, PAYMENT - amount);
 	puts("お釣り");
-	printf("500円: %d枚, 100円: %d枚, 50円: %d枚, 10円: %d枚", change.coin_500, change.coin_100, change.coin_50, change.coin_10);
+	printf("500円: %d枚, 100円: %d枚, 50円: %d枚, 10円: %d枚\n", change.coin_500, change.coin_100, change.coin_50, change.coin_10);
 
 	return 0;
 }

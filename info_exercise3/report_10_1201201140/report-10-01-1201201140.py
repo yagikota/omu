@@ -153,3 +153,11 @@ if __name__ == "__main__":
 
     with open(output_filename, "w") as f:
         write_score_details(students, avg_scores_list, max_scores_list, min_scores_list, f)
+
+
+データ数	完全列挙法	欲張り法	相対誤差
+8 & 38.2 & 37.1 & 0.02879581152
+12 & 60.3 & 60 & 0.004975124378
+16 & 132.2 & 131.5 & 0.005295007564
+20 & 163.5 & 162.8 & 0.004281345566
+24 & 209.4 & 206.4 & 0.01432664756

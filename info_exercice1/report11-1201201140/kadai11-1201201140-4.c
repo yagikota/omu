@@ -3,8 +3,6 @@
 
 #include<stdio.h>
 #include <stdlib.h> 
-#include<math.h>
-
 
 double p(int n) {
 	double y = 1.0;
@@ -16,7 +14,7 @@ double p(int n) {
 
 int main(int argc, char *argv[]) {
 	int n = atoi(argv[1]);
-	printf("クラス内に同じ誕生日の人が2人以上いる確率: %f\n", p(n));
+	printf("クラス内に同じ誕生日の人が2人以上いる確率: %.1f％\n", p(n)*100);
 
 	double y = 1.0;
 	int i = 0;

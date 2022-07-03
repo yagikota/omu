@@ -2,7 +2,7 @@
 // 八木洸太
 
 #include<stdio.h>
-#include <stdlib.h> 
+#include<stdlib.h> 
 #include<math.h>
 
 // is_prime returns 1 if n is a prime number, 0 otherwise.
@@ -34,7 +34,7 @@ int main(int argc, char* argv[]){
 	if (is_prime(n) == 1) {
 		printf("%d is a prime number\n", n);
 	} else {
-		printf("%d is a prime number\n", n);
+		printf("%d is not a prime number\n", n);
 	}
 
 	return 0;
