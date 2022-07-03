@@ -10,15 +10,13 @@ main:
 	li	$v0, 5
 	syscall
 	sw	$v0, x
-	# move $t0, $v0
 	
 	# read the second integer(y) and store the integer on y
 	li	$v0, 5
 	syscall
 	sw	$v0, y
-	# move $t1, $v0
 	
-	# z = x + y
+	# calculate x + y and and store the result on z
 	lw	$t0, x
 	lw	$t1, y
 	add	$t2, $t0, $t1

@@ -9,10 +9,14 @@ main:
 	la $a0, str
 	syscall
 
+# convert case
 loop:
+	# load byte
 	lb	$t1, str($t0)
+	# break loop if string is blank
  	beq	$t1, 0, exit
 
+	# check a letter using ASCII Code
 	# ~ @
 	blt	$t1, 'A', not_change_case
 	# A ~ Z
@@ -43,5 +47,6 @@ exit:
 	la	$a0, str
 	syscall
 
+	# exit
 	li	$v0, 10
 	syscall

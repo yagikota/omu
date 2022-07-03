@@ -1,6 +1,5 @@
 .data
 n:	.space 4
-n_pls1:	.space 4
 s:	.space 4
 
 .text
@@ -11,28 +10,22 @@ main:
 	syscall
 	sw	$v0, n
 	
-	# calcurate n+1 and store it on n_pls1
+	
 	lw	$t0, n
-	lw	$t1, n_pls1
-	addi 	$t1, $t0, 1
-	sw	$t1, n_pls1
+	lw	$t1, s
+	addi	$t0, $t0, 1
+loop:
+	slt	$t2, $s0, $t0 # 
+	beq	$t2, $zero, exit
+	add	$t1, $t1, $s0
+	addi	$s0, $s0, 1
+	j	loop
 	
-
-	# multiply n and n + 1
-	mult	$t0, $t1
-	
-	# devide n(n+1) by 2 and store the result on s
-	mflo	$t1
-	lw	$t3	s
-	div	$t3, $t1, 2
-	sw	$t3, s
-
-	# load s and print_int(s)
-	lw	$a0, s
+exit:
+	# print_int(print s)
+	move	$a0, $t1
 	li	$v0, 1
 	syscall
-	
-	
 	# exit
 	li	$v0, 10
 	syscall
