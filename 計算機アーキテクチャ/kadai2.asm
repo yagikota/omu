@@ -10,12 +10,15 @@ main:
 	syscall
 	sw	$v0, n
 	
-	
+	# load n and s
 	lw	$t0, n
 	lw	$t1, s
+	
+	# $t0 = $t0 + 1
 	addi	$t0, $t0, 1
 loop:
-	slt	$t2, $s0, $t0 # 
+	# calculate the sum 
+	slt	$t2, $s0, $t0
 	beq	$t2, $zero, exit
 	add	$t1, $t1, $s0
 	addi	$s0, $s0, 1
