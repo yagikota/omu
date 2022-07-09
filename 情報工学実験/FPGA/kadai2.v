@@ -29,7 +29,7 @@ module m_7segled (w_in, r_led);
 endmodule
 
 module m_top();
-	reg[3:0] r_in;
+	reg [3:0] r_in;
 	wire [6:0] w_led;
 	integer i;
 	initial $display ("       gfedcba");

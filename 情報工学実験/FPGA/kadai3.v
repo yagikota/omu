@@ -6,9 +6,8 @@
 // https://peterfab.com/ref/verilog/verilog_renerta/source/vrg00006.htm
 
 
-module N_bit_adder(input1, input2, answer, N);
-	// parameter N=32;
-	input N;
+module N_bit_adder(input1, input2, answer);
+	parameter N=32;
 	input [N-1:0] input1, input2;
 	output [N-1:0] answer;
 	wire  carry_out;
@@ -44,6 +43,7 @@ endmodule
 
 
 module m_top();
+	// 全加算器の真偽表を表示
 	reg a, b, c_in;
 	wire s, c_out;
 	initial begin
@@ -61,14 +61,21 @@ module m_top();
 	always @(*) #1 $display("%2d: %d %d %4d %d %4d", $time, a, b, c_in, s, c_out);
 	full_adder fd(a, b, c_in, s, c_out);
 
-	initial $display("N bit adder");
-	reg[3:0] input1, input2;
-	reg[3:0] ans;
-	initial begin
-		input1 <= 4'd0111;
-		input2 <= 4'd0101;
-	end
-	N_bit_adder nba(input1, input2, ans, 4);
-	initial $display("%d", ans); // 12
 
+
+	// 全加算器と半加算器を用いて，2進数n桁の加算を行う
+	// input1 + input2 = ans
+
+	// initial $display("N bit adder");
+	// reg [31:0] input1, input2;
+	// wire [31:0] ans;
+	// initial begin
+	// 	// 適宜値を変える
+	// 	input1 = 5;
+	// 	// 適宜値を変える
+	// 	input2 = 7;
+	// end
+	// N_bit_adder nba(input1, input2, ans);
+	// initial $display("%b(2) + %b(2) = %b(2)", input1, input2, ans);
+	// initial $display("%d + %d = %d", input1, input2, ans);
 endmodule
