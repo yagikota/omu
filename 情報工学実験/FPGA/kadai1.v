@@ -1,6 +1,8 @@
 // https://www.electronicshub.org/bcd-7-segment-led-display-decoder-circuit/
-
 // https://github.com/tnat93/Up-Down-Counter---7-segment-display/blob/master/Seven_seg.v
+
+// 1201201140
+// 八木洸太
 
 module or2(a, b, x);
 	input a, b;
