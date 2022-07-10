@@ -31,14 +31,10 @@ int is_perfect_num(int n) {
 
 // write here...
 int main() {
-	cout << "整数nを入力してください" << endl;
-	int n;
-	cin >> n;
-
-	if (is_perfect_num(n) == 1) {
-		cout << n << " is a perfect number." << endl;
-	} else {
-		cout << n << " is not a perfect number." << endl;
+	for (int i = 1; i <= 100; i++) {
+		if (is_perfect_num(i) == 1) {
+			cout << i << " is a perfect number." << endl;
+		}
 	}
 
 	return 0;
