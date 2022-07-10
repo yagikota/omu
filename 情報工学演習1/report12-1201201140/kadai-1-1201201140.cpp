@@ -30,7 +30,7 @@ int main() {
 		// 1〜9の表示(横軸の表示)
 		// write here...
 	cout.setf(ios::right, ios::adjustfield);
-	cout << "/  1  2  3  4  5  6  7  8  9" << endl;
+	cout << " |  1  2  3  4  5  6  7  8  9" << endl;
 
 	// 横線の表示
 	// write here...
@@ -53,7 +53,7 @@ int main() {
 	*/
 	// write here...
 	for (int i = 0; i < size; i++) {
-		cout << (i + 1) << "/";
+		cout << (i + 1) << "|";
 		for (int j = 0; j < size; j++) {
 			int value = times_tables[i][j];
 			cout << setw(3) << value;
