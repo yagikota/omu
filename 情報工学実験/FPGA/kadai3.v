@@ -16,10 +16,11 @@ module N_bit_adder(input1, input2, answer);
 	generate 
 		for(i = 0; i < N; i = i + 1)
 			begin: generate_N_bit_Adder
-		if(i == 0) 
-			half_adder ha(input1[0], input2[0], answer[0], carry[0]);
-		else
-			full_adder fa(input1[i], input2[i], carry[i-1], answer[i], carry[i]);
+			if(i == 0) 
+				// full_adder fa(input1[i], input2[i], carry[0], answer[i], carry[i]); // Error
+				half_adder ha(input1[i], input2[i], answer[i], carry[i]);
+			else
+				full_adder fa(input1[i], input2[i], carry[i-1], answer[i], carry[i]);
 			end
 		assign carry_out = carry[N-1];
 	endgenerate
@@ -62,20 +63,19 @@ module m_top();
 	full_adder fd(a, b, c_in, s, c_out);
 
 
-
 	// 全加算器と半加算器を用いて，2進数n桁の加算を行う
-	// input1 + input2 = ans
+	// input1 + input2 = ans を計算
 
-	// initial $display("N bit adder");
-	// reg [31:0] input1, input2;
-	// wire [31:0] ans;
-	// initial begin
-	// 	// 適宜値を変える
-	// 	input1 = 5;
-	// 	// 適宜値を変える
-	// 	input2 = 7;
-	// end
-	// N_bit_adder nba(input1, input2, ans);
-	// initial $display("%b(2) + %b(2) = %b(2)", input1, input2, ans);
-	// initial $display("%d + %d = %d", input1, input2, ans);
+	initial #100 $display("\nN bit adder");
+	reg [31:0] input1, input2;
+	wire [31:0] ans;
+	initial begin
+		// 適宜値を変える
+		input1 = 100;
+		// 適宜値を変える
+		input2 = 200;
+	end
+	N_bit_adder nba(input1, input2, ans);
+	initial #100 $display("%b(2) + %b(2) = %b(2)", input1, input2, ans); // 2進数表記
+	initial #100 $display("%d + %d = %d", input1, input2, ans); // 10進数表記
 endmodule
