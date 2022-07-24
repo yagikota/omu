@@ -1,11 +1,6 @@
 // 1201201140
 // 八木洸太
 
-// https://www.geeksforgeeks.org/full-adder-using-verilog-hdl/
-// https://esrd2014.blogspot.com/p/full-adder.html
-// https://peterfab.com/ref/verilog/verilog_renerta/source/vrg00006.htm
-
-
 module N_bit_adder(input1, input2, answer);
 	parameter N=32;
 	input [N-1:0] input1, input2;
