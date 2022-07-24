@@ -13,12 +13,24 @@ endmodule
 /********************************
 必要なモジュールを追加すること
 *********************************/
+module or3(a, b, c, x);
+	input a, b, c;
+	output x;
+	assign x = a | b | c;
+endmodule
+
+module nor4(a, b, c, d, x);
+	input a, b, c, d;
+	output x;
+	assign x = ~(a | b | c | d);
+endmodule
+
 
 module seg7_top();
 	reg a, b, c, d;
 	reg [6:0] x;
 	/* 必要な変数を追加すること　ヒント：各演算ごとに変数が必要 */
-	// wire 
+	wire s0, s1, s3, s4, s5, s6, s7, s8, s9;
 
 	initial begin
 		#10 a <= 0; b <= 0; c <= 0; d <= 0;
@@ -62,31 +74,29 @@ module seg7_top();
 	**********************************/
 	always@(*) begin
 		x = 7'b0000000;
-		if(((a & ~b & ~c & ~d) | (~a & ~b & c & ~d)) == 1'b1)
-		// if((d | b | (c & a) | (~c & ~a)) == 1'b0)
+		if(s0 == 1'b1)
 			x = x | 7'b0000001;
 			// x[0] = 1;
-		if(((a & ~b & c & ~d) | (~a & b & c & ~d)) == 1'b1)
-		// if(((~c) | (~b & ~a) | (b & a))  == 1'b0)
+		if(s1 == 1'b1)
 			x = x | 7'b0000010;
 			//x[1] = 1;
-		if((~a & b & ~c & ~d) == 1'b1)
+		if(s2 == 1'b1)
 		// if((c | ~b | a) == 1'b0)
 			x = x | 7'b0000100;
 			//x[2] = 1;
-		if((a & ~b & ~c & ~d) | (~a & ~b & c & ~d) | (a & b & c & ~d) == 1'b1)
+		if(s3 == 1'b1)
 		// if(((~c & ~a) | (b & ~a) | (c & ~b & a) | (~c & b) | d) == 1'b0)
 			x = x | 7'b0001000;
 			//x[3] = 1;
-		if(((a & ~b & ~c & ~d) | (a & b & ~c & ~d) | (~a & ~b & c & ~d) | (a & ~b & c & ~d) | (a & b & c & ~d) | (a & ~b & ~c & d)) == 1'b1)
+		if(s4 == 1'b1)
 		// if(((~c & ~a) | (b & ~a)) == 1'b0)
 			x = x | 7'b0010000;
 			//x[4] = 1;
-		if((a & ~b & ~c & ~d) | (~a & b & ~c & ~d) | (a & b & ~c & ~d) == 1'b1)
+		if(s5 == 1'b1)
 		// if((d | (~b & ~a) | (c & ~b) | (c & ~a)) == 1'b0)
 			x = x | 7'b0100000;
 			//x[5] = 1;
-		if((~a & ~b & ~c & ~d) | (a & ~b & ~c & ~d) | (a & b & c & ~d) == 1'b1)
+		if(s6 == 1'b1)
 		// if((d | (c & ~b) | (~c & b) | (b & ~a)) == 1'b0)
 			x = x | 7'b1000000;
 			//x[6] = 1;
@@ -96,6 +106,12 @@ module seg7_top();
 	必要なモジュールのインスタンスを作成すること
 	ヒント：演算ごとにインスタンスが必要
 	******************************************/
-	// m_or2 m_or_0()
+	or2 or_0((a & ~b & ~c & ~d) , (~a & ~b & c & ~d), s0);
+	or2 or_1((a & ~b & c & ~d), (~a & b & c & ~d), s1);
+	or2 or_2((~a & b & ~c & ~d), 1'b0, s2);
+	or3 or_3((a & ~b & ~c & ~d), (~a & ~b & c & ~d), (a & b & c & ~d), s3);
+	nor4 or_4((~a & ~b & ~c & ~d), (~a & b & ~c & ~d), (~a & b & c & ~d), (~a & ~b & ~c & d), s4);
+	or3 or_5((a & ~b & ~c & ~d), (~a & b & ~c & ~d), (a & b & ~c & ~d), s5);
+	or3 or_6((~a & ~b & ~c & ~d), (a & ~b & ~c & ~d), (a & b & c & ~d), s6);
 
 endmodule
