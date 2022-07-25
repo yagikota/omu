@@ -4,10 +4,9 @@
 // テストでる
 // apとbpが入れ替わっている
 void func(int **x, int **y) {
-	int *tmp = *x; // tmpにapを入れる
-	*x = *y; // apにbpを入れる
-	*y = tmp; // bpにtmp(ap)を入れる
-	// 結果として，apとbpが入れ変わる
+	int *tmp = *x; // ポインタtmpの参照先をポインタのポインタであるxの参照先の値(aのアドレス)とする。
+	*x = *y; //  ポインタのポインタであるxの参照先の値をポインタのポインタであるyの参照先の値(bのアドレス)とする。
+	*y = tmp; // ポインタのポインタであるyの参照先の値をポインタtmp(参照先はaのアドレス)にする
 }
 
 int main(void) {
@@ -20,3 +19,18 @@ int main(void) {
 	printf("a=%d, b=%d\n", a, b); // a, b自体は変化しない
 	return 0;
 }
+
+
+// void func(int x, int y, int *xp, int*yp) {
+// 	x = *yp;
+// 	int tmp = x + y;
+// 	xp = yp;
+// 	*xp = tmp;
+// }
+
+// int main(void){
+// 	int a=1, b=2;
+// 	func(a, b, &a, &b);
+// 	printf("a=%d, b=%d\n", a, b);
+// 	return 0;
+// }
