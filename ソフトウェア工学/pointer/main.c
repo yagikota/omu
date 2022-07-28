@@ -34,3 +34,22 @@ int main(void) {
 // 	printf("a=%d, b=%d\n", a, b);
 // 	return 0;
 // }
+
+
+// void func(int **x, int **y) {
+// 	int *tmp = *x; // ポインタtmpの参照先を、ポインタのポインタxの参照先の値(aのアドレス)にする。
+// 	*x = *y; // ポインタのポインタxの参照先の値をポインタのポインタyの参照先の値(bのアドレス)にする。
+// 	*y = tmp; // ポインタのポインタyの参照先の値をポインタtmpの参照先(aのアドレス)にする・
+// 結果、ポインタのポインタであるxとyの参照先の値(アドレス)が入れ替わるだけで、a, b自体は変化しない。
+// }
+
+// int main(void) {
+// 	int a = 3, b = 2;
+// 	int *ap = &a;
+// 	int *bp = &b;
+// 	printf("*ap=%d, *bp=%d\n", *ap, *bp);
+// 	func(&ap, &bp);
+// 	printf("*ap=%d, *bp=%d\n", *ap, *bp);
+// 	printf("a=%d, b=%d\n", a, b); //
+// 	return 0;
+// }

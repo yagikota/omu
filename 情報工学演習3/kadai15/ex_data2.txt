@@ -1,0 +1,5 @@
+Yoritomo,180,70
+Yoshimitsu,190,80
+Yoshimasa,185,75
+Nobunaga,175,60
+Hideyoshi,185,70

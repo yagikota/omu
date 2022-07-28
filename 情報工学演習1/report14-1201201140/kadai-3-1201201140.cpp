@@ -7,7 +7,7 @@
 #include <iostream>
 #include <stdlib.h> // rand関数のため
 #include <time.h>
-#include <math.h> 
+#include <math.h>
 
 using namespace std;
 

@@ -1,0 +1,8 @@
+Yoritomo 180 70
+Yoshimitsu 170 80
+Yoshimasa 185 75
+Nobunaga 175 60
+Hideyoshi 185 70
+Ieyasu 178 75
+Iemitsu 160 62
+Taro 170 55
